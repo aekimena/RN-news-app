@@ -89,6 +89,7 @@ export const Home = () => {
             contentContainerStyle={{
               paddingBottom: 50,
             }}
+            showsVerticalScrollIndicator={false}
             keyExtractor={(item, index) => item + index}
             renderItem={({item}) =>
               !isError && categoryLoading ? (
