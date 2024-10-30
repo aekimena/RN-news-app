@@ -1,7 +1,6 @@
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import colors from '../utils/colors';
-import {useSafeTops} from '../hooks/useSafeTops';
 import _styles from '../utils/_styles';
 import {CustomButton} from '../components/CustomButton';
 import images from '../utils/images';
@@ -29,6 +28,7 @@ export const GoogleSignUp = ({navigation}) => {
     // call google sign in hook
     onGooglePress()
       .then(async res => {
+        crashlytics().log('User signed up with google.');
         await crashlytics().setAttributes(res.userData?.user);
         // hide loader, update redux store and display home screen
         setLoaderVisible(false);
@@ -49,8 +49,8 @@ export const GoogleSignUp = ({navigation}) => {
   }, []);
 
   return (
-    <MainContainer backgroundColor="#fff" barStyle="dark-content">
-      <>
+    <>
+      <MainContainer backgroundColor="#fff" barStyle="dark-content">
         <View style={styles.container}>
           <Pressable
             onPress={() => navigation.goBack()}
@@ -88,9 +88,9 @@ export const GoogleSignUp = ({navigation}) => {
             />
           </View>
         </View>
-        <GoogleSginInLoader visible={loaderVisible} />
-      </>
-    </MainContainer>
+      </MainContainer>
+      <GoogleSginInLoader visible={loaderVisible} />
+    </>
   );
 };
 
