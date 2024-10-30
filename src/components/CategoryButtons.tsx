@@ -23,7 +23,7 @@ export const CategoryButtons = ({
           paddingTop: useSafeTops(30),
         },
       ]}>
-      <ScrollView horizontal>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
         <View style={[_styles.flexRow, {gap: 10, paddingHorizontal: 20}]}>
           {staticData.categoryList.map((item, index) => (
             <Pressable
