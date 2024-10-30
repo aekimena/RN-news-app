@@ -58,10 +58,12 @@ export const Login = ({navigation}) => {
   }, []);
 
   return (
-    <MainContainer backgroundColor="#fff" barStyle="dark-content">
-      <>
+    <>
+      <MainContainer backgroundColor="#fff" barStyle="dark-content">
         <View style={styles.container}>
-          <ScrollView contentContainerStyle={{paddingBottom: 0}}>
+          <ScrollView
+            contentContainerStyle={{paddingBottom: 0}}
+            showsVerticalScrollIndicator={false}>
             <View style={{height: height * 0.88}}>
               <AuthImages source={images.loginIn} />
               <View style={{marginTop: 20}}>
@@ -107,9 +109,9 @@ export const Login = ({navigation}) => {
             </View>
           </ScrollView>
         </View>
-        <GoogleSginInLoader visible={loaderVisible} />
-      </>
-    </MainContainer>
+      </MainContainer>
+      <GoogleSginInLoader visible={loaderVisible} />
+    </>
   );
 };
 
