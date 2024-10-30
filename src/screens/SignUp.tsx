@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import React, {useEffect, useRef, useState} from 'react';
 import colors from '../utils/colors';
-import {useSafeTops} from '../hooks/useSafeTops';
 import _styles from '../utils/_styles';
 import {CustomInputs} from '../components/CustomInputs';
 import {CustomButton} from '../components/CustomButton';
@@ -81,6 +80,7 @@ export const SignUp = ({navigation}) => {
       <View style={styles.container}>
         <ScrollView
           contentContainerStyle={{paddingBottom: 20}}
+          showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="always">
           <View>
             <Pressable
