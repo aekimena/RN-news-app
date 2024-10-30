@@ -16,6 +16,8 @@ Over-the-air update using code push
 
 Google sign in
 
+## Installation
+
 To build this app, I set up several packages for core functionality and UI
 
 React Navigation: React Navigation is one of the best packages For seamless screen navigation throughout the app.
