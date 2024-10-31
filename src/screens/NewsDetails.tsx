@@ -70,7 +70,7 @@ export const NewsDetails = ({route, navigation}) => {
                     {category}
                   </Text>
                 </View>
-                <Text style={[_styles.font24Medium, {color: '#fff'}]}>
+                <Text style={[_styles.font24Medium, {color: '#fff'}]} numberOfLines={4}>
                   {passedData.title}
                 </Text>
               </View>
