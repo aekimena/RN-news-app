@@ -1,5 +1,4 @@
 import {
-  Dimensions,
   Image,
   Pressable,
   ScrollView,
@@ -19,8 +18,6 @@ import {navigateScreen} from '../reduxUtils/services/analyticsActions';
 import {useDispatch} from 'react-redux';
 import {MainContainer} from '../components/MainContainer';
 
-const {height} = Dimensions.get('window');
-
 export const SignUp = ({navigation}) => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -30,8 +27,6 @@ export const SignUp = ({navigation}) => {
   const [phoneErr, setPhoneErr] = useState(false);
   const phoneRef = useRef<PhoneInput>();
   const dispatch = useDispatch();
-
-  // const isNewUserFromLogin = route?.params?.isNewUserFromLogin;
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -138,7 +133,7 @@ export const SignUp = ({navigation}) => {
             <View style={{marginTop: 30}}>
               <CustomButton
                 backgroundColor={colors.primary}
-                title={'Sign Up'}
+                title={'Continue'}
                 color="#fff"
                 onPress={proceedToGoogle}
                 disabled={
