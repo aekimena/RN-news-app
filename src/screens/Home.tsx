@@ -17,6 +17,8 @@ import crashlytics from '@react-native-firebase/crashlytics';
 export const Home = () => {
   const [activeCategory, setActiveCategory] = useState(0);
   const [newsData, setNewsData] = useState([]);
+  const [isCategoryButtonDisabled, setIsCategoryButtonDisabled] =
+    useState(false); // prevent users from triggering multiple API requests quickly in succession
 
   // get news api hook
   const {
@@ -30,15 +32,18 @@ export const Home = () => {
   // function to call when a category button is pressed.
 
   const onCategoryPress = (index: number) => {
+    setIsCategoryButtonDisabled(true);
     crashlytics().log('News api fetch request on category press'); // update crashlytics
     setActiveCategory(index);
     getCategoryNews({topic: staticData.categoryList[index].query})
       .then(res => {
         setNewsData(res?.data?.data);
+        setIsCategoryButtonDisabled(false);
       })
       .catch(err => {
         console.log(err);
         crashlytics().recordError(err);
+        setIsCategoryButtonDisabled(false);
       });
   };
 
@@ -57,22 +62,26 @@ export const Home = () => {
         <CategoryButtons
           onCategoryPress={onCategoryPress}
           activeCategory={activeCategory}
+          disabled={isCategoryButtonDisabled}
         />
       ),
     },
   ];
 
   useEffect(() => {
+    setIsCategoryButtonDisabled(true);
     crashlytics().log('News api fetch request on mount.'); // update crashlytics
 
     // get news list on mount
     getCategoryNews({topic: staticData.categoryList[activeCategory].query})
       .then(res => {
         setNewsData(res?.data?.data);
+        setIsCategoryButtonDisabled(false);
       })
       .catch(err => {
         console.log(err);
         crashlytics().recordError(err);
+        setIsCategoryButtonDisabled(false);
       });
 
     // Log when screen is viewed
