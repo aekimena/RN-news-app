@@ -10,9 +10,11 @@ import {logUserAction} from '../reduxUtils/services/analyticsActions';
 export const CategoryButtons = ({
   activeCategory,
   onCategoryPress,
+  disabled,
 }: {
   activeCategory: number;
   onCategoryPress: (val: number) => void;
+  disabled: boolean;
 }) => {
   const dispatch = useDispatch();
   return (
@@ -35,6 +37,7 @@ export const CategoryButtons = ({
                   }),
                 );
               }}
+              disabled={disabled}
               key={index}
               style={[
                 _styles.allCenter,
