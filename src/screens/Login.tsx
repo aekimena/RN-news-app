@@ -19,36 +19,33 @@ import {setGoogleUser} from '../reduxUtils/services/googleUser';
 import {useGoogleSignIn} from '../hooks/useGoogleSignIn';
 import {navigateScreen} from '../reduxUtils/services/analyticsActions';
 import crashlytics from '@react-native-firebase/crashlytics';
-import {GoogleSginInLoader} from '../components/GoogleSginInLoader';
 import {MainContainer} from '../components/MainContainer';
 
 const {height} = Dimensions.get('window');
 
-export const Login = ({navigation}) => {
-  const [loaderVisible, setLoaderVisible] = useState(false);
+export const Login = ({navigation}: any) => {
+  const [isGoogleButtonDisabled, setIsGoogleButtonDisabled] = useState(false); // disables google button after sign in successful
 
   const {onGooglePress} = useGoogleSignIn();
   const dispatch = useDispatch();
 
   function proceed() {
-    // display loader modal
-    setLoaderVisible(true);
     // update to crashlytics
     crashlytics().log('Google sign in button pressed.');
     // call google sign in hook
     onGooglePress()
-      .then(async res => {
+      .then(async (res: any) => {
+        setIsGoogleButtonDisabled(true);
         crashlytics().log('User signed in.');
         await crashlytics().setAttributes(res.userData?.user);
-        // hide loader, update redux store and display home screen
-        setLoaderVisible(false);
+        // update redux store and display home screen
         dispatch(setGoogleUser(true));
         auth().signInWithCredential(res.googleCredential); // for firebase authentication update
       })
       .catch(err => {
         crashlytics().recordError(err);
         console.log(err);
-        setLoaderVisible(false);
+        setIsGoogleButtonDisabled(false);
       });
   }
 
@@ -89,6 +86,7 @@ export const Login = ({navigation}) => {
                     </View>
                   }
                   onPress={proceed}
+                  disabled={isGoogleButtonDisabled}
                 />
               </View>
             </View>
@@ -110,7 +108,6 @@ export const Login = ({navigation}) => {
           </ScrollView>
         </View>
       </MainContainer>
-      <GoogleSginInLoader visible={loaderVisible} />
     </>
   );
 };
