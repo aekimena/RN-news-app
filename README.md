@@ -34,6 +34,8 @@ react-redux / @reduxjs/toolkit: For global state management and easier setup wit
 
 @react-native-firebase/auth: I installed this For managing user authentication, integrated with Google Sign-In.
 
+@react-native-firebase/messaging: I installed this package. I didn't really use it in the app, but I could send a push notification from firebase console to all app users, and they would all get the message.
+
 @react-native-firebase/crashlytics: To track and log app crashes and errors in Firebase
 
 @react-native-google-signin/google-signin: To  Manage user authentication via Google.
