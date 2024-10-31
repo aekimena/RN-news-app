@@ -32,6 +32,9 @@ export const Home = () => {
   // function to call when a category button is pressed.
 
   const onCategoryPress = (index: number) => {
+    if (index == activeCategory) {
+      return;
+      }
     setIsCategoryButtonDisabled(true);
     crashlytics().log('News api fetch request on category press'); // update crashlytics
     setActiveCategory(index);
